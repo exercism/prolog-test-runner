@@ -13,7 +13,7 @@
 # ./bin/run-tests-in-docker.sh
 
 # build docker image
-docker build --rm -t prolog .
+docker build --rm -t exercism/prolog-test-runner .
 
 # run docker image using the settings mimicking the production environment
 docker run \
@@ -23,4 +23,4 @@ docker run \
     --mount type=tmpfs,dst=/tmp \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
-    prolog
+    exercism/prolog-test-runner

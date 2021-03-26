@@ -31,7 +31,7 @@ output_dir="${3%/}"
 mkdir -p "${output_dir}"
 
 # build docker image
-docker build --rm -t prolog-test-runner .
+docker build --rm -t exercism/prolog-test-runner .
 
 # run image passing the arguments
 docker run \
@@ -40,4 +40,4 @@ docker run \
     --mount type=bind,src="${input_dir}",dst=/solution \
     --mount type=bind,src="${output_dir}",dst=/output \
     --mount type=tmpfs,dst=/tmp \
-    prolog-test-runner "${slug}" /solution /output
+    exercism/prolog-test-runner "${slug}" /solution /output
