@@ -18,14 +18,18 @@ exit_code=0
 
 # iterate over all test directories
 for testdir in ${tests_dir}/*; do
-    testname="$(basename $testdir)"
+    testdir_name="$(basename $testdir)"
+    testdir_path="$(realpath $testdir)"
     expected_results_file="${testdir}/results.json"
     actual_results_file="${output_dir}/results.json"
 
-    if [ "$testname" != output ] && [ -f "${expected_results_file}" ]; then
-        bin/run.sh "$testname" "$testdir" "$output_dir"
+    if [ "${testdir_name}" != output ] && [ -f "${expected_results_file}" ]; then
+        bin/run.sh "${testdir_name}" "${testdir}" "${output_dir}"
 
-        echo "${testname}: comparing ${actual_results_file}"
+        # normalize the path to the solution in the results file
+        sed -i "s~${testdir_path}~/solution~g" "${actual_results_file}"
+
+        echo "${testdir_name}: comparing ${actual_results_file}"
         diff "${expected_results_file}" "${actual_results_file}"
 
         if [ $? -ne 0 ]; then

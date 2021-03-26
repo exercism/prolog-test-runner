@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # Synopsis:
 # Run the test runner against a solution
@@ -31,17 +30,19 @@ tests_file="${input_dir}/${exercise}_tests.plt"
 results_file="${output_dir}/results.json"
 
 # create output directory if it doesn't exist
-mkdir -p "$output_dir"
+mkdir -p "${output_dir}"
 
-echo "$slug: testing..."
+echo "${slug}: testing..."
 
-test_output=$(swipl -f "$implementation_file" -s "$tests_file" -g run_tests,halt -t 'halt(1)' -- --all)
+# run the tests for the provided implementation file
+# and redirect stdout and stderr to capture it
+test_output=$(swipl -f "${implementation_file}" -s "${tests_file}" -g run_tests,halt -t 'halt(1)' -- --all 2>&1)
 
 # write results.json file based on the exit code of test run command that was just executed
 if [ $? -eq 0 ]; then
-    jq -n '{version: 1, status: "pass"}' > $results_file
+    jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
-    jq -n --arg message "${test_output}" '{version: 1, status: "fail", message: $message}' > $results_file
+    jq -n --arg message "${test_output}" '{version: 1, status: "fail", message: $message}' > ${results_file}
 fi
 
 echo "${slug}: done"

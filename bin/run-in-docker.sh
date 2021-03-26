@@ -23,18 +23,21 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     exit 1
 fi
 
-# build docker image
-docker build --rm -t prolog-test-runner .
+slug="$1"
+input_dir="${2%/}"
+output_dir="${3%/}"
 
 # create output directory if it doesn't exist
-output_dir="$3"
-mkdir -p "$output_dir"
+mkdir -p "${output_dir}"
+
+# build docker image
+docker build --rm -t prolog-test-runner .
 
 # run image passing the arguments
 docker run \
     --network none \
     --read-only \
-    --mount type=bind,src=$PWD/$2,dst=/solution \
-    --mount type=bind,src=$PWD/$output_dir,dst=/output \
+    --mount type=bind,src="${input_dir}",dst=/solution \
+    --mount type=bind,src="${output_dir}",dst=/output \
     --mount type=tmpfs,dst=/tmp \
-    prolog-test-runner $1 /solution /output
+    prolog-test-runner "${slug}" /solution /output

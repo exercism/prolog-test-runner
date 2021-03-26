@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "fail",
+  "message": "% PL-Unit: leap_tests .....\nERROR: /solution/example_partial_fail_tests.plt:24:\n\ttest leap_twenty_fourth_century: failed\n\nERROR: /solution/example_partial_fail_tests.plt:27:\n\ttest leap_y2k: failed\n\n done\n% 2 tests failed\n% 5 tests passed\nERROR: -g run_tests,halt: false"
+}
