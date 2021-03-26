@@ -2,8 +2,8 @@
 set -e
 
 # Synopsis:
-# Run the test runner against a solution from the test runner Docker image
-# The test runner Docker image is built automatically
+# Run the test runner on a solution using the test runner Docker image.
+# The test runner Docker image is built automatically.
 
 # Arguments:
 # $1: exercise slug
@@ -17,7 +17,7 @@ set -e
 # Example:
 # ./bin/run-in-docker.sh two-fer /absolute/path/to/two-fer/solution/folder/ /absolute/path/to/output/directory/
 
-# if the required arguments are not provided, print usage and exit
+# If any required arguments is missing, print the usage and exit
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     echo "usage: ./bin/run-in-docker.sh exercise-slug /absolute/path/to/solution/folder/ /absolute/path/to/output/directory/"
     exit 1
@@ -27,13 +27,13 @@ slug="$1"
 input_dir="${2%/}"
 output_dir="${3%/}"
 
-# create output directory if it doesn't exist
+# Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
-# build docker image
+# Build the Docker image
 docker build --rm -t exercism/prolog-test-runner .
 
-# run image passing the arguments
+# Run the Docker image using the settings mimicking the production environment
 docker run \
     --network none \
     --read-only \

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Synopsis:
-# Run the test runner against a solution
+# Run the test runner on a solution.
 
 # Arguments:
 # $1: exercise slug
@@ -15,7 +15,7 @@
 # Example:
 # ./bin/run.sh two-fer /absolute/path/to/two-fer/solution/folder/ /absolute/path/to/output/directory/
 
-# if the required arguments are not provided, print usage and exit
+# If any required arguments is missing, print the usage and exit
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     echo "usage: ./bin/run.sh exercise-slug /absolute/path/to/two-fer/solution/folder/ /absolute/path/to/output/directory/"
     exit 1
@@ -29,16 +29,17 @@ implementation_file="${input_dir}/${exercise}.pl"
 tests_file="${input_dir}/${exercise}_tests.plt"
 results_file="${output_dir}/results.json"
 
-# create output directory if it doesn't exist
+# Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
 echo "${slug}: testing..."
 
-# run the tests for the provided implementation file
-# and redirect stdout and stderr to capture it
+# Run the tests for the provided implementation file and redirect stdout and
+# stderr to capture it
 test_output=$(swipl -f "${implementation_file}" -s "${tests_file}" -g run_tests,halt -t 'halt(1)' -- --all 2>&1)
 
-# write results.json file based on the exit code of test run command that was just executed
+# Write the results.json file based on the exit code of the command that was 
+# just executed that tested the implementation file
 if [ $? -eq 0 ]; then
     jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
