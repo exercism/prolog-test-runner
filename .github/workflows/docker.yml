@@ -1,4 +1,4 @@
-name: CI
+name: Docker
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   multiple-registries:
-    name: Push Docker images to DockerHub and ECR
+    name: Push Docker image to DockerHub and ECR
     runs-on: ubuntu-latest
 
     env:
