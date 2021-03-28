@@ -43,7 +43,7 @@ test_output=$(swipl -f "${implementation_file}" -s "${tests_file}" -g run_tests,
 if [ $? -eq 0 ]; then
     jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
-    jq -n --arg message "${test_output}" '{version: 1, status: "fail", message: $message}' > ${results_file}
+    jq -n --arg output "${test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
 fi
 
 echo "${slug}: done"
