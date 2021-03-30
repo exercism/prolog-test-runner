@@ -1,5 +1,5 @@
 {
   "version": 1,
   "status": "fail",
-  "message": "% PL-Unit: leap_tests \nERROR: /solution/example_all_fail_tests.plt:9:\n\ttest leap_year: failed\n\nERROR: /solution/example_all_fail_tests.plt:12:\n\ttest not_leap_year: failed\n\n done\n% 2 tests failed\n% 0 tests passed\nERROR: -g run_tests,halt: false"
+  "output": "% PL-Unit: leap_tests \nERROR: /solution/example_all_fail_tests.plt:9:\n\ttest leap_year: failed\n\nERROR: /solution/example_all_fail_tests.plt:12:\n\ttest not_leap_year: failed\n\n done\n% 2 tests failed\n% 0 tests passed\nERROR: -g run_tests,halt: false"
 }
