@@ -43,7 +43,12 @@ test_output=$(swipl -f "${implementation_file}" -s "${tests_file}" -g run_tests,
 if [ $? -eq 0 ]; then
     jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
-    jq -n --arg output "${test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
+    # Manually add colors to the output to help scanning the output for errors
+    colorized_test_output=$(echo "$test_output" \
+         | GREP_COLOR='01;31' grep --color=always -e '^.*failed$' -e '^ERROR:.*' -e '^' \
+         | GREP_COLOR='01;32' grep --color=always -e '^.*passed$' -e '^')
+
+    jq -n --arg output "${colorized_test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
 fi
 
 echo "${slug}: done"

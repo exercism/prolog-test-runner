@@ -1,5 +1,5 @@
 {
   "version": 1,
   "status": "fail",
-  "output": "% PL-Unit: leap_tests .....\nERROR: /solution/example_partial_fail_tests.plt:24:\n\ttest leap_twenty_fourth_century: failed\n\nERROR: /solution/example_partial_fail_tests.plt:27:\n\ttest leap_y2k: failed\n\n done\n% 2 tests failed\n% 5 tests passed\nERROR: -g run_tests,halt: false"
+  "output": "% PL-Unit: leap_tests .....\n\u001b[01;31m\u001b[KERROR: /solution/example_partial_fail_tests.plt:24:\u001b[m\u001b[K\n\u001b[01;31m\u001b[K\ttest leap_twenty_fourth_century: failed\u001b[m\u001b[K\n\n\u001b[01;31m\u001b[KERROR: /solution/example_partial_fail_tests.plt:27:\u001b[m\u001b[K\n\u001b[01;31m\u001b[K\ttest leap_y2k: failed\u001b[m\u001b[K\n\n done\n\u001b[01;31m\u001b[K% 2 tests failed\u001b[m\u001b[K\n\u001b[01;32m\u001b[K% 5 tests passed\u001b[m\u001b[K\n\u001b[01;31m\u001b[KERROR: -g run_tests,halt: false\u001b[m\u001b[K"
 }
