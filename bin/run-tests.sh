@@ -25,7 +25,7 @@ for test_dir in tests/*; do
     if [ "${test_dir_name}" != "output" ] && [ -f "${expected_results_file_path}" ]; then
         bin/run.sh "${test_dir_name}" "${test_dir}" "${test_dir}"
 
-        # Normalize the path to the solution in the results file
+        # Normalize the results file
         sed -i "s~${test_dir_path}~/solution~g" "${results_file_path}"
 
         echo "${test_dir_name}: comparing ${results_file} to ${expected_results_file}"
