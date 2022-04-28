@@ -9,6 +9,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 COPY . /opt/test-runner
 WORKDIR /opt/test-runner
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
