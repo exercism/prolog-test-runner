@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "fail",
+  "message": "\u001b[01;31m\u001b[KERROR: /solution/syntax_error.pl:1:19: Syntax error: Unexpected end of file\u001b[m\u001b[K\n% PL-Unit: leap_tests \n% No tests to run\n\u001b[01;31m\u001b[KERROR: -g run_tests,halt: append_args/3: Unknown procedure: '$messages':to_list/2\u001b[m\u001b[K"
+}
