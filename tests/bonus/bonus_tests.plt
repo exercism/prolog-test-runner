@@ -4,30 +4,86 @@ pending :-
     write('\nA TEST IS PENDING!\n'),
     fail.
 
-:- begin_tests(leap_tests).
+bonus :-
+    current_prolog_flag(argv, ['--bonus'|_]).
+bonus :-
+    write('\nA TEST IS BONUS!\n'),
+    fail.
 
-    test(leap_year, condition(true)) :-
-        leap(1996).
+:- begin_tests(equilateral_triangle).
 
-    test(standard_and_odd_year, condition(pending)) :-
-        not(leap(1997)).
+    test(all_sides_are_equal) :-
+        triangle(2, 2, 2, "equilateral").
 
-    test(standard_even_year, condition(pending)) :-
-        not(leap(1998)).
+    test(any_side_is_unequal, [fail, condition(pending)]) :-
+        triangle(2, 3, 2, "equilateral").
 
-    test(standard_nineteeth_century, condition(pending)) :-
-        not(leap(1900)).
+    test(no_sides_are_equal, [fail, condition(pending)]) :-
+        triangle(5, 4, 6, "equilateral").
 
-    test(standard_eighteenth_century, condition(pending)) :-
-        not(leap(1800)).
+    test(all_zero_sides_are_not_a_triangle, [fail, condition(pending)]) :-
+        triangle(0, 0, 0, "equilateral").
 
-    test(leap_twenty_fourth_century, condition(pending)) :-
-        leap(2400).
+    test(all_sides_are_floats_and_equal, condition(pending)) :-
+        triangle((0.5), (0.5), (0.5), "equilateral").
 
-    test(leap_y2k, condition(pending)) :-
-        leap(2000).
+    test(all_sides_are_equal_but_mixed_types, condition(bonus)) :-
+        triangle(2, 2.0, 2, "equilateral").
 
-    test(leap_bonus, [condition(pending), condition(bonus)]) :-
-        leap(2001).
+:- end_tests(equilateral_triangle).
 
-:- end_tests(leap_tests).
+:- begin_tests(isosceles_triangle).
+
+    test(last_two_sides_equal, condition(pending)) :-
+        triangle(3, 4, 4, "isosceles").
+
+    test(first_two_sides_equal, condition(pending)) :-
+        triangle(4, 4, 3, "isosceles").
+
+    test(first_and_last_sides_equal, condition(pending)) :-
+        triangle(4, 3, 4, "isosceles").
+
+    test(equilateral_triangles_are_also_isosceles, condition(pending)) :-
+        triangle(4, 4, 4, "isosceles").
+
+    test(no_sides_are_equal, [fail, condition(pending)]) :-
+        triangle(2, 3, 4, "isosceles").
+
+    test(first_triangle_inequality_violation, [fail, condition(pending)]) :-
+        triangle(1, 1, 3, "isosceles").
+
+    test(second_triangle_inequality_violation, [fail, condition(pending)]) :-
+        triangle(1, 3, 1, "isosceles").
+
+    test(third_triangle_inequality_violation, [fail, condition(pending)]) :-
+        triangle(3, 1, 1, "isosceles").
+
+    test(sides_may_be_floats, condition(pending)) :-
+        triangle((0.5), (0.4), (0.5), "isosceles").
+
+    test(sides_are_a_mix, condition(bonus)) :-
+        triangle(5, 4, 5.0, "isosceles").
+
+:- end_tests(isosceles_triangle).
+
+:- begin_tests(scalene_triangle).
+
+    test(no_sides_are_equal, condition(pending)) :-
+        triangle(5, 4, 6, "scalene").
+
+    test(no_sides_are_equal_mixed, condition(bonus)) :-
+        triangle(5.0, 4, 6, "scalene").
+
+    test(all_sides_are_equal, [fail, condition(pending)]) :-
+        triangle(4, 4, 4, "scalene").
+
+    test(two_sides_are_equal, [fail, condition(pending)]) :-
+        triangle(4, 4, 3, "scalene").
+
+    test(may_not_violate_triangle_inequality, [fail, condition(pending)]) :-
+        triangle(7, 3, 2, "scalene").
+
+    test(small_scalene_triangle_with_floating_point_values, condition(pending)) :-
+        triangle((0.5), (0.4), (0.6), "scalene").
+
+:- end_tests(scalene_triangle).
