@@ -6,6 +6,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN swipl pack install date_time -y
+
 COPY . /opt/test-runner
 WORKDIR /opt/test-runner
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
