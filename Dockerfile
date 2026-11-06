@@ -1,4 +1,4 @@
-FROM swipl:10.1.14
+FROM swipl:10.1.19
 
 RUN apt-get update && \
     apt-get install -y jq && \
